@@ -15,3 +15,16 @@ quit_button = Button(main_window, text="Quit", background="red", command=main_wi
 quit_button.grid(row=1, column=0)"""
 
 from tkinter import *
+from random import *
+
+program = Tk()
+
+quitB = Button(program, text="Quit", background="red", command=program.destroy)
+quitB.grid(row=0, column=0)
+
+print(randint(0,9))
+
+def changeColor():
+    print(money)
+
+
