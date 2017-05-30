@@ -19,12 +19,16 @@ from random import *
 
 program = Tk()
 
+fulton = Label()
+
 quitB = Button(program, text="Quit", background="red", command=program.destroy)
 quitB.grid(row=0, column=0)
 
-print(randint(0,9))
+money = randint(0,9)
 
 def changeColor():
-    print(money)
+    if(randint < 5):
+        
+        
 
 

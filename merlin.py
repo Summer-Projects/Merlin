@@ -69,7 +69,20 @@ def main():
             kurseddane += cardW
         elif chosenC == 'MAUNDER':
             kurseddane += cardW
-        del(hand[actual])
+            del(hand[actual]) # <- Bug here. Error message:
+            """
+                Your hand is MAUNDER FOOTSOLDIER, MAUNDER SERGEANT, ALGOR GENERAL, KURSEDDANE HORSEMAN. Which one do you want?algor generl
+                That is not a card in your hand.
+                Your hand is MAUNDER FOOTSOLDIER, MAUNDER SERGEANT, ALGOR GENERAL, KURSEDDANE HORSEMAN. Which one do you want?algor general
+                Traceback (most recent call last):
+                  File "C:\Users\Steven Copeland\Documents\Github\Merlin\merlin.py", line 78, in <module>
+                    main()
+                  File "C:\Users\Steven Copeland\Documents\Github\Merlin\merlin.py", line 73, in main
+                    activateCard()
+                  File "C:\Users\Steven Copeland\Documents\Github\Merlin\merlin.py", line 63, in activateCard
+                    cardW = hand[actual]['worth']
+                TypeError: list indices must be integers or slices, not NoneType
+            """
     activateCard()
     print('Kurseddane is',kurseddane)
     print('Maunder is',maunder)
