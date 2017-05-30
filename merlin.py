@@ -1,4 +1,3 @@
-#import tkinter, random, pygame
 """Game MERLIN"""
 from random import random
 kurseddane = 0
@@ -7,6 +6,7 @@ fullton = 0
 algor = 0
 cards = []
 hand = []
+actual = None
 deckCut = False
 def cutDeck(n1,n2,w):
     x = {'name1': n1, 'name2': n2, 'fullname': n1 + " " + n2, 'worth': w}
@@ -32,21 +32,22 @@ def main():
         hand.append(draw)
     def pickCard():
         fullCards = ', '.join(showHand)
-        ask = input("Your hand is " + fullCards + ". Which one do you want?")
-        print('printing')
+        ask = input("Your hand is " + fullCards + ". Which one do you want?").upper()
         if not ask in showHand:
             print("That is not a card in your hand.")
             pickCard()
         else:
             return ask
     chosen = pickCard()
-    def returnCounty(actual):
+    def returnCounty():
+        global actual
         counter = 3
         while counter > -1:
             if hand[counter]['fullname'] == chosen:
                 actual = counter
+                counter = -1
                 if hand[counter]['name1'] == 'WILD':
-                    pickCounty = input('Your card is wild. Which county do you pick?')
+                    pickCounty = input('Your card is wild. Which county do you pick?').upper()
                     if not pickCounty in pCounties:
                         print("Sorry, that is not a county")
                         returnCounty()
@@ -54,10 +55,12 @@ def main():
                         return pickCounty
                 else:
                     return hand[counter]['name1']
-    placement = None
-    chosenC = returnCounty(placement)
+            else:
+                counter -= 1
+    chosenC = returnCounty()
     def activateCard():
-        cardW = hand[placement]['worth']
+        global fullton, algor, maunder, kurseddane, actual
+        cardW = hand[actual]['worth']
         if chosenC == 'FULLTON':
             fullton += cardW
         elif chosenC == 'ALGOR':
@@ -66,7 +69,7 @@ def main():
             kurseddane += cardW
         elif chosenC == 'MAUNDER':
             kurseddane += cardW
-        del(hand[placement])
+        del(hand[actual])
     activateCard()
     print('Kurseddane is',kurseddane)
     print('Maunder is',maunder)
