@@ -69,7 +69,7 @@ def main():
             kurseddane += cardW
         elif chosenC == 'MAUNDER':
             kurseddane += cardW
-            del(hand[actual]) # <- Bug here. Error message:
+        del(hand[actual]) # <- Bug here. Error message:
             """
                 Your hand is MAUNDER FOOTSOLDIER, MAUNDER SERGEANT, ALGOR GENERAL, KURSEDDANE HORSEMAN. Which one do you want?algor generl
                 That is not a card in your hand.
