@@ -19,16 +19,13 @@ from random import *
 
 program = Tk()
 
-fulton = Label()
+def fultonFunc():
+    print("Fulton")
 
-quitB = Button(program, text="Quit", background="red", command=program.destroy)
-quitB.grid(row=0, column=0)
+def algorFunc():
+    print("Algor")
 
-money = randint(0,9)
-
-def changeColor():
-    if(randint < 5):
-        
-        
-
-
+fulton = Button(program, text="Fulton", command=fultonFunc)
+fulton.grid(row=0, column=0)
+algor = Button(program, text="Algor", command=algor)
+algor.grid(row=0, column=5)
