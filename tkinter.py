@@ -1,8 +1,16 @@
 """from tkinter import *
+<<<<<<< HEAD
+=======
+
+>>>>>>> ac1ca684e0fecf97ccdb16bedc759d97bb7dde33
 main_window = Tk()
 count_label = Label(main_window, text="Count: 0")
 count_label.grid(row=0, column=1)
 count_value = 0
+<<<<<<< HEAD
+=======
+
+>>>>>>> ac1ca684e0fecf97ccdb16bedc759d97bb7dde33
 def increment_count():
     global count_value, count_label
     count_value = count_value + 1
@@ -25,5 +33,9 @@ def algorFunc():
 
 fulton = Button(program, text="Fulton", command=fultonFunc)
 fulton.grid(row=0, column=0)
+<<<<<<< HEAD
 algor = Button(program, text="Algor", command=algorFunc)
+=======
+algor = Button(program, text="Algor", command=algor)
+>>>>>>> ac1ca684e0fecf97ccdb16bedc759d97bb7dde33
 algor.grid(row=0, column=5)
