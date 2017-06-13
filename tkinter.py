@@ -14,6 +14,7 @@ quit_button.grid(row=1, column=0)"""
 
 from tkinter import *
 from random import *
+from sys import *
 
 program = Tk()
 
@@ -37,3 +38,5 @@ kurseddane = Button(program, text="Kurseddane", command=kurseddaneFunc)
 kurseddane.grid(row=2, column=0)
 maunder = Button(program, text="Maunder", command=maunderFunc)
 maunder.grid(row=2, column=3)
+quitGame = Button(program, text="Quit", command=program.destroy)
+quitGame.grid(row=3, column=3)
