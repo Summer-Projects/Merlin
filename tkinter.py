@@ -30,6 +30,13 @@ def kurseddaneFunc():
 def maunderFunc():
     print("Maunder")
 
+def card():
+    counties = ['FULLTON','MAUNDER','KURSEDDANE','ALGOR','FULLTON','MAUNDER','KURSEDDANE','ALGOR','WILD']
+    ranks = {'FOOTSOLDIER': 1,'SERGEANT': 2,'HORSEMAN': 3, 'GENERAL': 4}
+    rank = random.choice(ranks)
+    countie = random.choice(counties)
+
+
 fulton = Button(program, text="Fulton", command=fultonFunc)
 fulton.grid(row=0, column=0)
 algor = Button(program, text="Algor", command=algorFunc)
@@ -38,6 +45,5 @@ kurseddane = Button(program, text="Kurseddane", command=kurseddaneFunc)
 kurseddane.grid(row=2, column=0)
 maunder = Button(program, text="Maunder", command=maunderFunc)
 maunder.grid(row=2, column=3)
-
 quitGame = Button(program, text="Quit", command=program.destroy)
 quitGame.grid(row=3, column=3)
