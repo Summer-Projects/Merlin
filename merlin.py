@@ -1,91 +1,125 @@
 """Game MERLIN"""
 from random import random
-kurseddane = 0
-maunder = 0
-fullton = 0
-algor = 0
+kurseddane, algor, maunder, fullton = 0,0,0,0
+counties = ['FULLTON','ALGOR','MAUNDER','KURSEDDANE']
 cards = []
 hand = []
-actual = None
+showHand = []
+AIhand = []
 deckCut = False
-def cutDeck(n1,n2,w):
-    x = {'name1': n1, 'name2': n2, 'fullname': n1 + " " + n2, 'worth': w}
+def makeCard(n1,n2,w):
+    x = {'name1': n1, 'name2':n2, 'fullname': n1 + " " + n2, 'worth': w}
     cards.append(x)
-def main():
-    global kurseddane,maunder,fullton,algor,cards,hand,deckCut,random
-    pCounties = ['FULLTON','MAUNDER','KURSEDDANE','ALGOR']
-    showHand = []
+    
+def cutDeck():
+    global deckCut
     if not deckCut:
-        counties = ['FULLTON','MAUNDER','KURSEDDANE','ALGOR','FULLTON','MAUNDER','KURSEDDANE','ALGOR','WILD']
-        ranks = {'FOOTSOLDIER': 1,'SERGEANT': 2,'HORSEMAN': 3, 'GENERAL': 4}
+        counties = ['FUllTON','ALGOR','MAUNDER','KURSEDDANE','FULLTON','ALGOR','MAUNDER','KURSEDDANE','WILD']
+        ranks = {'FOOTSOLDIER': 1,'SERGEANT':2,'HORSEMAN': 3, 'GENERAL': 4}
         x = len(counties) - 1
         while x > -1:
             for rank in ranks:
-                cutDeck(counties[x],rank,ranks[rank])
+                makeCard(counties[x],rank,ranks[rank])
             x -= 1
         deckCut = True
-    while len(hand) < 4:
-        pivk = int(random()*len(cards))
-        draw = cards[pivk]
-        del(cards[pivk])
-        showHand.append(draw['fullname'])
-        hand.append(draw)
-    def pickCard():
-        fullCards = ', '.join(showHand)
-        ask = input("Your hand is " + fullCards + ". Which one do you want?").upper()
-        if not ask in showHand:
-            print("That is not a card in your hand.")
-            pickCard()
+
+def addCardsToHand():
+    global cards, hand, showHand
+    if len(hand) < 4:
+        draw = int(len(cards) * random())
+        hand.append(cards[draw])
+        showHand.append(cards[draw]['fullname'])
+        del(cards[draw])
+        addCardsToHand()
+
+def chooseCard():
+    global showHand
+    joinedHand = ', '.join(showHand)
+    ask = input('Your hand is ' + joinedHand + '. Which card do you pick?').upper()
+    if not ask in showHand:
+        print("Sorry, that is not a card in your hand")
+        chooseCard()
+    x = 0
+    while x < 4:
+        if showHand[x] == ask:
+            break
+        x += 1
+    del(showHand[x])
+    return x
+
+def pickCounty(n):
+    global hand
+    if hand[n]['name1'] == 'WILD':
+        ask = input('You picked a wild card. Which county do you want?').upper()
+        if not ask in counties:
+            print("Sorry, that is not a county")
+            pickCounty(n)
+        return ask
+    else:
+        return hand[n]['name1']
+
+def war(army, county):
+    global maunder, kurseddane, algor, fullton
+    if county == 'KURSEDDANE':
+        kurseddane += army
+    elif county == 'ALGOR':
+        algor += army
+    elif county == 'MAUNDER':
+        maunder += army
+    elif county == 'FULLTON':
+        fullton += army
+
+def aiHand():
+    if len(AIhand) < 4:
+        draw = int(random()*len(cards))
+        AIhand.append(cards[draw])
+        del(cards[draw])
+        aiHand()
+
+def aiWar(cardNum):
+    global maunder, kurseddane, algor, fullton
+    card = AIhand[cardNum]
+    if card['name1'] == 'WILD':
+        choose = int(random()*4)
+        county = counties[choose]
+    else:
+        county = card['name1']
+    worth = card['worth']
+    if county == 'KURSEDDANE':
+        kurseddane -= worth
+    elif county == 'ALGOR':
+        algor -= worth
+    elif county == 'MAUNDER':
+        maunder -= worth
+    elif county == 'FULLTON':
+        fullton -= worth
+    print('Arthur Intellect played a force of ' + str(worth) + ' against ' + county)
+    del(AIhand[cardNum])
+    
+def main():
+    cutDeck()
+    addCardsToHand()
+    placement = chooseCard()
+    power = hand[placement]['worth']
+    county = pickCounty(placement)
+    del(hand[placement])
+    war(power, county)
+    aiHand()
+    pick = int(random()*4)
+    aiWar(pick)
+    nameToNumDict = {'FULLTON': fullton, 'KURSEDDANE': kurseddane, 'MAUNDER': maunder, 'ALGOR': algor}
+    for field in nameToNumDict:
+        if nameToNumDict[field] > 0:
+            print('You have a force of ' + str(nameToNumDict[field]) + ' in ' + field)
+        elif nameToNumDict[field] < 0:
+            print('King Arthur Intellect has a force of ' + str(nameToNumDict[field]) + ' in ' + field)
         else:
-            return ask
-    chosen = pickCard()
-    def returnCounty():
-        global actual
-        counter = 3
-        while counter > -1:
-            if hand[counter]['fullname'] == chosen:
-                actual = counter
-                counter = -1
-                if hand[counter]['name1'] == 'WILD':
-                    pickCounty = input('Your card is wild. Which county do you pick?').upper()
-                    if not pickCounty in pCounties:
-                        print("Sorry, that is not a county")
-                        returnCounty()
-                    else:
-                        return pickCounty
-                else:
-                    return hand[counter]['name1']
-            else:
-                counter -= 1
-    chosenC = returnCounty()
-    def activateCard():
-        global fullton, algor, maunder, kurseddane, actual
-        cardW = hand[actual]['worth']
-        if chosenC == 'FULLTON':
-            fullton += cardW
-        elif chosenC == 'ALGOR':
-            algor += cardW
-        elif chosenC == 'KURSEDDANE':
-            kurseddane += cardW
-        elif chosenC == 'MAUNDER':
-            kurseddane += cardW
-        del(hand[actual]) # <- Bug here. Error message:
-            """
-                Your hand is MAUNDER FOOTSOLDIER, MAUNDER SERGEANT, ALGOR GENERAL, KURSEDDANE HORSEMAN. Which one do you want?algor generl
-                That is not a card in your hand.
-                Your hand is MAUNDER FOOTSOLDIER, MAUNDER SERGEANT, ALGOR GENERAL, KURSEDDANE HORSEMAN. Which one do you want?algor general
-                Traceback (most recent call last):
-                  File "C:\Users\Steven Copeland\Documents\Github\Merlin\merlin.py", line 78, in <module>
-                    main()
-                  File "C:\Users\Steven Copeland\Documents\Github\Merlin\merlin.py", line 73, in main
-                    activateCard()
-                  File "C:\Users\Steven Copeland\Documents\Github\Merlin\merlin.py", line 63, in activateCard
-                    cardW = hand[actual]['worth']
-                TypeError: list indices must be integers or slices, not NoneType
-            """
-    activateCard()
-    print('Kurseddane is',kurseddane)
-    print('Maunder is',maunder)
-    print('Algor is',algor)
-    print('Fullton is',fullton)
+            print('No one has a force in ' + field)
+    if kurseddane > 0 and maunder > 0 and fullton > 0 and algor > 0:
+        print('Congrats! You have defeated King Arthur Intellect! You are now Lord of Merlin')
+    elif kurseddane < 0 and maunder < 0 and fullton< 0 and algor < 0:
+        print('King Arthur Intellect has defeated you, and is now Lord of Merlin. You go back to your country in shame')
+    else:
+        main()
+        
 main()
