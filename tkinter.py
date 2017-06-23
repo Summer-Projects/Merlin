@@ -39,8 +39,16 @@ def card():
 
 fulton = Button(program, text="Fulton", command=fultonFunc)
 fulton.grid(row=0, column=0)
+# fulton number
+fulton = Button(program, text="0", command=fultonFunc)
+fulton.grid(row=0, column=1)
+
 algor = Button(program, text="Algor", command=algorFunc)
 algor.grid(row=0, column=3)
+# algor number
+algor = Button(program, text="0", command=algorFunc)
+algor.grid(row=0, column=4)
+
 kurseddane = Button(program, text="Kurseddane", command=kurseddaneFunc)
 kurseddane.grid(row=2, column=0)
 # kurseddande number
@@ -49,5 +57,9 @@ kurseddane.grid(row=2, column=1)
 
 maunder = Button(program, text="Maunder", command=maunderFunc)
 maunder.grid(row=2, column=3)
+# maunder number
+maunder = Button(program, text="0", command=maunderFunc)
+maunder.grid(row=2, column=5)
+
 quitGame = Button(program, text="Quit", command=program.destroy)
 quitGame.grid(row=3, column=3)
