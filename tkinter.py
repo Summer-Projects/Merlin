@@ -59,7 +59,7 @@ maunder = Button(program, text="Maunder", command=maunderFunc)
 maunder.grid(row=2, column=3)
 # maunder number
 maunder = Button(program, text="0", command=maunderFunc)
-maunder.grid(row=2, column=5)
+maunder.grid(row=2, column=4)
 
 quitGame = Button(program, text="Quit", command=program.destroy)
 quitGame.grid(row=3, column=3)
