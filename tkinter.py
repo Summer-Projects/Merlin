@@ -43,6 +43,10 @@ algor = Button(program, text="Algor", command=algorFunc)
 algor.grid(row=0, column=3)
 kurseddane = Button(program, text="Kurseddane", command=kurseddaneFunc)
 kurseddane.grid(row=2, column=0)
+# kurseddande number
+kurseddane = Button(program, text="0", command=kurseddaneFunc)
+kurseddane.grid(row=2, column=1)
+
 maunder = Button(program, text="Maunder", command=maunderFunc)
 maunder.grid(row=2, column=3)
 quitGame = Button(program, text="Quit", command=program.destroy)
