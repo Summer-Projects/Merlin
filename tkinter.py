@@ -35,6 +35,7 @@ def card():
     ranks = {'FOOTSOLDIER': 1,'SERGEANT': 2,'HORSEMAN': 3, 'GENERAL': 4}
     rank = random.choice(ranks)
     countie = random.choice(counties)
+    print(rank, countie)
 
 
 fulton = Button(program, text="Fulton", command=fultonFunc)
