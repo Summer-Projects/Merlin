@@ -50,16 +50,14 @@ maunder.grid(row=2, column=3)
 maunder = Button(program, text="0", command=maunderFunc)
 maunder.grid(row=2, column=4)
 
-card1 = Button(program, text="card", command=maunderFunc)
+card1 = Button(program, text="card", command=kurseddaneFunc)
 card1.grid(row=3, column=0)
-card2 = Button(program, text="card", command=maunderFunc)
+card2 = Button(program, text="card", command=algorFunc)
 card2.grid(row=3, column=1)
-card3 = Button(program, text="card", command=maunderFunc)
+card3 = Button(program, text="card", command=fultonFunc)
 card3.grid(row=3, column=2)
 card4 = Button(program, text="card", command=maunderFunc)
 card4.grid(row=3, column=3)
-
-
 
 quitGame = Button(program, text="Quit", command=program.destroy)
 quitGame.grid(row=4, column=4)
