@@ -39,13 +39,13 @@ maunder = Button(program, text="Maunder 0", command=maunderFunc, padx=16, pady=3
 maunder.grid(row=2, column=3)
 
 card1 = Button(program, text="card", command=kurseddaneFunc, padx=25, pady=25)
-card1.grid(row=3, column=0)
+card1.grid(row=4, column=0)
 card2 = Button(program, text="card", command=algorFunc, padx=25, pady=25)
-card2.grid(row=3, column=1)
+card2.grid(row=4, column=1)
 card3 = Button(program, text="card", command=fultonFunc, padx=25, pady=25)
-card3.grid(row=3, column=2)
+card3.grid(row=4, column=2)
 card4 = Button(program, text="card", command=maunderFunc, padx=25, pady=25)
-card4.grid(row=3, column=3)
+card4.grid(row=4, column=3)
 
 quitGame = Button(program, text="Quit", command=program.destroy, padx=25, pady=25)
-quitGame.grid(row=4, column=4)
+quitGame.grid(row=5, column=5)
