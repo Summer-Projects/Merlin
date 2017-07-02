@@ -17,12 +17,14 @@ def maunderFunc():
     print("Maunder")
 
 def card():
-    counties = ['FULLTON','MAUNDER','KURSEDDANE','ALGOR','FULLTON','MAUNDER','KURSEDDANE','ALGOR','WILD']
-    ranks = {'FOOTSOLDIER': 1,'SERGEANT': 2,'HORSEMAN': 3, 'GENERAL': 4}
-    rank = random.choice(ranks)
-    countie = random.choice(counties)
-    print(rank, countie)
-
+    card1 = Button(program, text="card", command=maunderFunc)
+    card1.grid(row=3, column=0)
+    card2 = Button(program, text="card", command=maunderFunc)
+    card2.grid(row=3, column=1)
+    card3 = Button(program, text="card", command=maunderFunc)
+    card3.grid(row=3, column=2)
+    card4 = Button(program, text="card", command=maunderFunc)
+    card4.grid(row=3, column=3)
 
 fulton = Button(program, text="Fulton", command=fultonFunc)
 fulton.grid(row=0, column=0)
@@ -48,5 +50,16 @@ maunder.grid(row=2, column=3)
 maunder = Button(program, text="0", command=maunderFunc)
 maunder.grid(row=2, column=4)
 
+card1 = Button(program, text="card", command=maunderFunc)
+card1.grid(row=3, column=0)
+card2 = Button(program, text="card", command=maunderFunc)
+card2.grid(row=3, column=1)
+card3 = Button(program, text="card", command=maunderFunc)
+card3.grid(row=3, column=2)
+card4 = Button(program, text="card", command=maunderFunc)
+card4.grid(row=3, column=3)
+
+
+
 quitGame = Button(program, text="Quit", command=program.destroy)
-quitGame.grid(row=3, column=3)
+quitGame.grid(row=4, column=4)
