@@ -27,16 +27,16 @@ def card():
     card4.grid(row=3, column=3)
 
 fulton = Button(program, text="Fulton 0", command=fultonFunc, padx=25, pady=30)
-fulton.grid(row=0, column=0)
+fulton.grid(row=0, column=1)
 
 algor = Button(program, text="Algor 0", command=algorFunc, padx=27, pady=30)
-algor.grid(row=0, column=3)
+algor.grid(row=0, column=2)
 
 kurseddane = Button(program, text="Kurseddane 0", command=kurseddaneFunc, padx=10, pady=30)
-kurseddane.grid(row=2, column=0)
+kurseddane.grid(row=2, column=1)
 
 maunder = Button(program, text="Maunder 0", command=maunderFunc, padx=16, pady=30)
-maunder.grid(row=2, column=3)
+maunder.grid(row=2, column=2)
 
 card1 = Button(program, text="card", command=kurseddaneFunc, padx=25, pady=25)
 card1.grid(row=4, column=0)
