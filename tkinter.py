@@ -47,5 +47,8 @@ card3.grid(row=4, column=2)
 card4 = Button(program, text="card", command=maunderFunc, padx=25, pady=25)
 card4.grid(row=4, column=3)
 
+text = Label(program, text="Text text text")
+text.grid(row=5, column=3)
+
 quitGame = Button(program, text="Quit", command=program.destroy, padx=25, pady=25)
-quitGame.grid(row=5, column=5)
+quitGame.grid(row=6, column=6)
