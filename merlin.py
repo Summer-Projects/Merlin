@@ -6,22 +6,28 @@ cards = []
 hand = []
 showHand = []
 AIhand = []
-deckCut = False
+x = 0
 def makeCard(n1,n2,w):
     x = {'name1': n1, 'name2':n2, 'fullname': n1 + " " + n2, 'worth': w}
     cards.append(x)
     
 def cutDeck():
-    global deckCut
-    if not deckCut:
-        counties = ['FUllTON','ALGOR','MAUNDER','KURSEDDANE','FULLTON','ALGOR','MAUNDER','KURSEDDANE','WILD']
+    if len(cards) == 0:
+        counties = ['ALGOR','FULLTON','MAUNDER','KURSEDDANE','FULLTON','ALGOR','MAUNDER','KURSEDDANE','WILD']
         ranks = {'FOOTSOLDIER': 1,'SERGEANT':2,'HORSEMAN': 3, 'GENERAL': 4}
         x = len(counties) - 1
         while x > -1:
             for rank in ranks:
                 makeCard(counties[x],rank,ranks[rank])
             x -= 1
-        deckCut = True
+        for card in hand:
+            if card in cards:
+                position = cards.index(card)
+                del(cards[position])
+        for card in AIhand:
+            if card in cards:
+                position = cards.index(card)
+                del(cards[position])
 
 def addCardsToHand():
     global cards, hand, showHand
@@ -33,20 +39,20 @@ def addCardsToHand():
         addCardsToHand()
 
 def chooseCard():
-    global showHand
+    global showHand, x
     joinedHand = ', '.join(showHand)
     ask = input('Your hand is ' + joinedHand + '. Which card do you pick?').upper()
     if not ask in showHand:
         print("Sorry, that is not a card in your hand")
         chooseCard()
-    x = 0
-    while x < 4:
-        if showHand[x] == ask:
-            break
-        x += 1
-    del(showHand[x])
+    else:
+        x = 0
+        while x < 4:
+            if showHand[x] == ask:
+                break
+            x += 1
+        del(showHand[x])
     return x
-
 def pickCounty(n):
     global hand
     if hand[n]['name1'] == 'WILD':
@@ -93,7 +99,7 @@ def aiWar(cardNum):
         maunder -= worth
     elif county == 'FULLTON':
         fullton -= worth
-    print('Arthur Intellect played a force of ' + str(worth) + ' against ' + county)
+    print('King Arthur Intellect played a ' + card['name2'] + ' against ' + county)
     del(AIhand[cardNum])
     
 def main():
@@ -112,7 +118,7 @@ def main():
         if nameToNumDict[field] > 0:
             print('You have a force of ' + str(nameToNumDict[field]) + ' in ' + field)
         elif nameToNumDict[field] < 0:
-            print('King Arthur Intellect has a force of ' + str(nameToNumDict[field]) + ' in ' + field)
+            print('King Arthur Intellect has a force of ' + str(nameToNumDict[field] * -1) + ' in ' + field)
         else:
             print('No one has a force in ' + field)
     if kurseddane > 0 and maunder > 0 and fullton > 0 and algor > 0:
