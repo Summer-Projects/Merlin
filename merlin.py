@@ -10,10 +10,6 @@ AIhand = []
 x = 0
 wildCard = {}
 started = False
-kDict = {'python': kurseddane, 'tkinter': kurseddaneTK}
-fDict = {'python': fullton, 'tkinter': fulltonTK}
-mDict = {'python': maunder, 'tkinter': maunderTK}
-aDict = {'python': algor, 'tkinter': algorTK}
 
 #makes tkinter program
 program = Tk()
@@ -37,6 +33,14 @@ card2 = Button(program, text=hand[2]['fullname'], command=card2func, padx=25, pa
 card2.grid(row=4, column=2)
 card3 = Button(program, text=hand[3]['fullname'], command=card3func, padx=25, pady=25,width=23)
 card3.grid(row=4, column=3)
+
+
+# edited variables
+
+kDict = {'python': kurseddane, 'tkinter': kurseddaneTK}
+fDict = {'python': fullton, 'tkinter': fulltonTK}
+mDict = {'python': maunder, 'tkinter': maunderTK}
+aDict = {'python': algor, 'tkinter': algorTK}
 
 #python functions
 def makeCard(n1,n2,w):
