@@ -1,4 +1,14 @@
-"""Game MERLIN with TKinter"""
+"""Game MERLIN with TKinter.
+Here is a basic outline of how the code goes:
+
+Module importation and variable making
+Various python functions that makes cards
+Card functions
+Tkinter program
+Wild functions
+Refresh function
+Main function
+"""
 #imports modules and makes variables
 from tkinter import *
 from random import random
@@ -9,38 +19,6 @@ hand = []
 AIhand = []
 x = 0
 wildCard = {}
-started = False
-
-#makes tkinter program
-program = Tk()
-text = Label(program, text="Pick one of your cards")
-text.grid(row=5, column=1, columnspan=2)
-quitGame = Button(program, text="Quit", command=program.destroy, padx=25, pady=25)
-quitGame.grid(row=6, column=6)
-fulltonTK = Button(program, text="Fullton: " + str(fullton), padx=25, pady=30)
-fulltonTK.grid(row=0, column=1)
-algorTK = Button(program, text="Algor: " + str(algor), padx=27, pady=30)
-algorTK.grid(row=0, column=2)
-kurseddaneTK = Button(program, text="Kurseddane: " + str(kurseddane), padx=10, pady=30)
-kurseddaneTK.grid(row=2, column=1)
-maunderTK = Button(program, text="Maunder: " + str(maunder), padx=16, pady=30)
-maunderTK.grid(row=2, column=2)
-card0 = Button(program, text=hand[0]['fullname'], command=card0func, padx=25, pady=25,width=23)
-card0.grid(row=4, column=0)
-card1 = Button(program, text=hand[1]['fullname'], command=card1func, padx=25, pady=25,width=23)
-card1.grid(row=4, column=1)
-card2 = Button(program, text=hand[2]['fullname'], command=card2func, padx=25, pady=25,width=23)
-card2.grid(row=4, column=2)
-card3 = Button(program, text=hand[3]['fullname'], command=card3func, padx=25, pady=25,width=23)
-card3.grid(row=4, column=3)
-
-
-# edited variables
-
-kDict = {'python': kurseddane, 'tkinter': kurseddaneTK}
-fDict = {'python': fullton, 'tkinter': fulltonTK}
-mDict = {'python': maunder, 'tkinter': maunderTK}
-aDict = {'python': algor, 'tkinter': algorTK}
 
 #python functions
 def makeCard(n1,n2,w):
@@ -64,6 +42,7 @@ def cutDeck():
             if card in cards:
                 position = cards.index(card)
                 del(cards[position])
+cutDeck()
 
 def addCardsToHand():
     global cards, hand
@@ -72,6 +51,7 @@ def addCardsToHand():
         hand.append(cards[draw])
         del(cards[draw])
         addCardsToHand()
+addCardsToHand()
 
 #card functions
 def card0func():
@@ -154,6 +134,29 @@ def card3func():
         del(hand[3])
         wild()
 
+#makes tkinter program
+program = Tk()
+text = Label(program, text="Pick one of your cards")
+text.grid(row=5, column=1, columnspan=2)
+quitGame = Button(program, text="Quit", command=program.destroy, padx=25, pady=25)
+quitGame.grid(row=6, column=6)
+fulltonTK = Button(program, text="Fullton: " + str(fullton), padx=25, pady=30)
+fulltonTK.grid(row=0, column=1)
+algorTK = Button(program, text="Algor: " + str(algor), padx=27, pady=30)
+algorTK.grid(row=0, column=2)
+kurseddaneTK = Button(program, text="Kurseddane: " + str(kurseddane), padx=10, pady=30)
+kurseddaneTK.grid(row=2, column=1)
+maunderTK = Button(program, text="Maunder: " + str(maunder), padx=16, pady=30)
+maunderTK.grid(row=2, column=2)
+card0 = Button(program, text=hand[0]['fullname'], command=card0func, padx=25, pady=25,width=23)
+card0.grid(row=4, column=0)
+card1 = Button(program, text=hand[1]['fullname'], command=card1func, padx=25, pady=25,width=23)
+card1.grid(row=4, column=1)
+card2 = Button(program, text=hand[2]['fullname'], command=card2func, padx=25, pady=25,width=23)
+card2.grid(row=4, column=2)
+card3 = Button(program, text=hand[3]['fullname'], command=card3func, padx=25, pady=25,width=23)
+card3.grid(row=4, column=3)
+
 #wild functions
 def wild():
     fulltonTK.configure(command=fulltonWild)
@@ -198,21 +201,13 @@ def refresh():
     maunderTK.configure(text='Maunder: ' + str(maunder))
     kurseddaneTK.configure(text='Kurseddane: ' + str(kurseddane))
 
-def backgrounds(county):
-    if county['python'] > 0:
-        county['tkinter'].configure(background='red')
-    elif county['python'] < 0:
-        county['tkinter'].configure(background='blue')
-    else:
-        county['tkinter'].configure(background='white')
-
 def main():
     cutDeck()
     addCardsToHand()
     refresh()
     countiesList = [kDict,mDict,fDict,aDict]
-    for x in countiesList:
-        backgrounds(x)
+    for stuff in countiesList:
+        backgrounds(stuff)
     if kurseddane > 0 and maunder > 0 and fullton > 0 and algor > 0:
         text.configure(text="Congrats! You have defeated King Arthur Intellect and are Lord of Merlin!")
 main()
