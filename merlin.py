@@ -236,9 +236,12 @@ def main():
     AIcounty = AIcountyPick(AIcardPick)
     AIwar(AIcardPick,AIcounty)
     refresh()
+<<<<<<< HEAD
     countiesList = [kDict,mDict,fDictn,aDict]
     for stuff in countiesList:
         backgrounds(stuff)
+=======
+>>>>>>> 74e3be5dd110cf4a0bad27e2e17e1ff47e854326
     if kurseddane > 0 and maunder > 0 and fullton > 0 and algor > 0:
         text.configure(text="Congrats! You have defeated King Arthur Intellect and are Lord of Merlin!")
     elif kurseddane < 0 and maunder < 0 and fullton< 0 and algor < 0:
