@@ -53,6 +53,34 @@ def addCardsToHand():
         addCardsToHand()
 addCardsToHand()
 
+#ai functions
+def makeAIhand():
+    if len(AIhand) < 4:
+        draw = int(len(cards) * random())
+        AIhand.append(cards[draw])
+        del(cards[draw])
+        makeAIhand()
+def AIcountyPick(num):
+    card = AIhand[num]
+    if not card['name1'] == 'WILD':
+        return card['name1']
+    else:
+        countyPick = counties[int(4 * random())]
+        return countyPick
+
+def AIwar(placement,county):
+    global kurseddane, algor, maunder, fullton
+    army = AIhand[placement]['worth']
+    if county == 'KURSEDDANE':
+        kurseddane -= army
+    elif county == 'ALGOR':
+        algor -= army
+    elif county == 'MAUNDER':
+        maunder -= army
+    elif county == 'FULLTON':
+        fullton -= army
+    text.configure(text='King Arthur Intellect played an ' + AIhand[placement]['name2'] + ' against ' + county) 
+    del(AIhand[placement])
 #card functions
 def card0func():
     global maunder, kurseddane, algor, fullton, wildCard, card0
@@ -191,7 +219,6 @@ def kurseddaneWild():
     main()
 #tkinter functins
 def refresh():
-    text.configure(text='Pick one of your cards')
     card0.configure(text=hand[0]['fullname'])
     card1.configure(text=hand[1]['fullname'])
     card2.configure(text=hand[2]['fullname'])
@@ -204,10 +231,17 @@ def refresh():
 def main():
     cutDeck()
     addCardsToHand()
+    makeAIhand()
+    AIcardPick = int(4*random())
+    AIcounty = AIcountyPick(AIcardPick)
+    AIwar(AIcardPick,AIcounty)
     refresh()
-    countiesList = [kDict,mDict,fDict,aDict]
+    countiesList = [kDict,mDict,fDictn,aDict]
     for stuff in countiesList:
         backgrounds(stuff)
     if kurseddane > 0 and maunder > 0 and fullton > 0 and algor > 0:
         text.configure(text="Congrats! You have defeated King Arthur Intellect and are Lord of Merlin!")
+    elif kurseddane < 0 and maunder < 0 and fullton< 0 and algor < 0:
+        text.configure(text="King Arthur Intellect has defeated you. You go back to your country in shame.")
+        
 main()
